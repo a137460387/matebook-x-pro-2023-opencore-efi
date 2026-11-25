@@ -1,6 +1,6 @@
 # Huawei MateBook X Pro 2023 — OpenCore EFI
 
-**当前版本：v2.5.0**（2026-11-26）— 触摸屏修复：Goodix GXTP738X 经 SSDT-TPL1 + VoodooI2CTouchscreenHIDEventDriver 实现绝对坐标触摸，与触控板共存无冲突。详见 [CHANGELOG.md](CHANGELOG.md)。
+**当前版本：v2.6.0**（2026-11-26）— WiFi 启动自动重连 workaround（LaunchDaemon 修复 IO80211 scan HALTED）；IntelBTPatcher 启用；华为 BLE 鼠标配对成功（重置清 bond）。详见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 适用机型
 - Huawei MateBook X Pro 2023（i7-1360P / Iris Xe）
@@ -22,8 +22,8 @@
 | 电池 OEM/型号 | ✅ DESAY / HB5781P1EEW-31T |
 | 显卡加速 | ✅ WhateverGreen / WhateverXe |
 | 声卡 | ✅ AppleALC 自定义 layout 99（CX11970，扬声器+耳机自动切换） |
-| WiFi | ✅ itlwm + HeliPort（Intel AX211） |
-| 蓝牙 | ✅ IntelBluetoothFirmware + BlueToolFixup |
+| WiFi | ✅ AirportItlwm（Intel AX211，启动自动重连 workaround） |
+| 蓝牙 | ✅ IntelBluetoothFirmware + BlueToolFixup + IntelBTPatcher（Apple 设备 + 华为 BLE 鼠标均正常） |
 | 触控板 | ✅ VoodooI2C 自定义修复（D0上电+polling模式，手势完整） |
 | 触屏 | ✅ VoodooI2CTouchscreenHIDEventDriver（绝对坐标，SSDT-TPL1） |
 | 启动速度 | ✅ ~30s（reset 2s 超时优化） |
@@ -41,14 +41,28 @@
 2. 用 GenSMBIOS 或 macserial 生成自己的 Serial/MLB/ROM/SystemUUID 填入 config.plist（发布版中这些值为 `REPLACE_ME`，**必须替换后才能使用**，不要使用或提交别人的序列号）
 3. BIOS 设置：Disable Secure Boot、Fast Boot；AHCI mode
 4. 从 OpenCore 引导安装或启动 macOS
+5. 安装 WiFi 启动自动重连 workaround（解决启动后扫描列表为空）：
+   ```bash
+   sudo cp scripts/wifi-reset.plist /Library/LaunchDaemons/com.local.wifi-reset.plist
+   sudo chown root:wheel /Library/LaunchDaemons/com.local.wifi-reset.plist
+   sudo chmod 644 /Library/LaunchDaemons/com.local.wifi-reset.plist
+   sudo launchctl bootstrap system /Library/LaunchDaemons/com.local.wifi-reset.plist
+   ```
+   该 daemon 在启动约 25s 后自动关闭再打开 WiFi，触发 IO80211 扫描状态机恢复并自动重连已知网络。
 
-无线：Intel AX211 使用 `itlwm`，进系统后需安装 [HeliPort](https://github.com/OpenIntelWireless/HeliPort/releases) 才能连 Wi-Fi。安装器里没有 Wi-Fi，请准备完整离线安装包或有线网卡。
+无线：Intel AX211 使用 AirportItlwm（ForbiddenItlwm fork），原生 WiFi 界面直接连接，无需 HeliPort。安装器里没有 Wi-Fi，请准备完整离线安装包或有线网卡。
 
 ## 已知限制
 - AC 拔插响应 ≤10s（无 ACPI 通知，靠轮询）
 - 非满充充电显示和睡眠唤醒待进一步验证
 - USB 扩展坞音频需手动切换输出（macOS 设计行为，非 bug）
 - Apple Music 蓝牙耳机播放受 DRM 限制（黑苹果固有限制）
+
+提示：华为 BLE 鼠标首次配对需长按重置键进入配对模式，清除旧 bond 后重新配对即可。
+- WiFi 启动后需约 30s 自动重连：IO80211 scan 状态机时序竞争导致开机扫描列表为空，已用 LaunchDaemon 自动重置 workaround（见安装方法第 5 步）
+
+## 推荐工具（非 EFI 组件）
+- [Atoll](https://github.com/Ebullioscopic/Atoll)：灵动岛风格菜单栏工具，黑苹果可用
 
 ## 许可证
 - OpenCore：BSD-3-Clause

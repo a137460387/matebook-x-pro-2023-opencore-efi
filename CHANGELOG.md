@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.6.0 (2026-11-26)
+- fix: WiFi 启动后 scan HALTED 问题（LaunchDaemon 自动重置 workaround）
+- fix: IntelBTPatcher 启用 + btleadvoff（BLE 配对改善）
+- fix: 华为 BLE 鼠标配对成功（重置鼠标清除旧 bond 后重新配对，非固件限制）
+- feat: 灵动岛 Atoll 推荐（非 EFI 组件，README 提及）
+
 ## v2.5.0 (2026-11-26)
 - feat: 触摸屏修复（Goodix GXTP738X, I2C-1, SSDT-TPL1）
 - feat: VoodooI2CTouchscreenHIDEventDriver 绝对坐标触摸事件
