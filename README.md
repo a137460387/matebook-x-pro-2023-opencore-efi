@@ -1,25 +1,60 @@
-# MateBook X Pro 2023 OpenCore EFI（公开参考版）
+# Huawei MateBook X Pro 2023 — OpenCore EFI
 
-这是华为 MateBook X Pro 2023（酷睿 i7-1360P，Iris Xe）的 OpenCore 参考配置，基于 [1401](https://github.com/nullmoth/1401) 生成。
+## 适用机型
+- Huawei MateBook X Pro 2023（i7-1360P / Iris Xe）
+- 其他华为 TGL/RPL 笔记本可能兼容（HWEC EC 路径相同）
 
-这里**不含**任何本机序列号、主板号、UUID 或网卡地址。使用前请用 1401 或 `macserial` 为自己生成一套身份信息，填进对应 `config.plist` 的 `PlatformInfo -> Generic`。不要使用、也不要提交别人的序列号。
+## macOS 版本
+- macOS Sequoia 15.x（已验证 15.8.3）→ `efi-sequoia/`
+- macOS Tahoe 26.x（需 WhateverXe 显卡加速包）→ `efi-tahoe/`
 
-## 目录
+第一次安装更建议先用 Sequoia。Tahoe 因系统不再自带 AppleHDA，参考 EFI 里没有 AppleALC，内置扬声器和麦克风可能没有声音。
 
-- `efi-sequoia/`：目标系统为 macOS Sequoia **15.8 或更新的 15.x**
-- `efi-tahoe/`：目标系统为 macOS Tahoe **26.7 或更新的 26.x**（更早的 26.x 没有这份配置所需的显卡加速支持）
+## 功能状态
+| 功能 | 状态 |
+|---|---|
+| 电池显示 | ✅ HuaweiECBattery 自研驱动 |
+| AC 拔插识别 | ✅ 响应 ≤10s |
+| 充电功率显示 | ⚠️ Wattage 固定 60W（实际支持 90W） |
+| 显卡加速 | ✅ WhateverGreen / WhateverXe |
+| 声卡 | ✅ AppleALC |
+| WiFi | ✅ itlwm + HeliPort（Intel AX211） |
+| 蓝牙 | ✅ IntelBluetoothFirmware + BlueToolFixup |
+| 触控板 | ⚠️ VoodooI2C（偶发失灵需重启） |
+| 睡眠 | ⚠️ 未充分验证 |
+| 关机 | ⚠️ 可能卡住 ~4 分钟（USB dext 残留） |
 
-第一次安装更建议先用 Sequoia。两份配置的 USB 端口映射、触摸板和无线方案相同，但 Tahoe 因系统不再自带 AppleHDA，这份参考 EFI 里也没有 AppleALC，内置扬声器和麦克风可能没有声音。
+## 依赖
+- OpenCore 1.0.x
+- Lilu
+- VirtualSMC
+- ECEnabler（诊断增强版，含 ECEDIAG 属性用于调试）
+- HuaweiECBattery（自研，基于 VirtualSMC SMCBatteryManager fork）
 
-## 使用前请知道
+## 安装方法
+1. 将 EFI 目录复制到 ESP 分区
+2. 用 GenSMBIOS 或 macserial 生成自己的 Serial/MLB/ROM/SystemUUID 填入 config.plist（发布版中这些值为 `REPLACE_ME`，**必须替换后才能使用**，不要使用或提交别人的序列号）
+3. BIOS 设置：Disable Secure Boot、Fast Boot；AHCI mode
+4. 从 OpenCore 引导安装或启动 macOS
 
-- 这是参考配置，不是开箱即用的完整安装包。缺少身份信息时，不要直接拿去写安装 U 盘后登录 Apple 账号。
-- 显卡：第一次进入系统是基础显示。安装 Sequoia 15.8+ 或 Tahoe 26.7+ 后，再用 1401 的 Mac 应用安装 WhateverXe 完整显卡包，才可能打开加速。作者主要验证过同类的 Raptor Lake-U，这台机器上的 Iris Xe（设备 ID A7A0）属于预期可用、尚未广泛验证。
-- 无线：Intel AX211 使用 `itlwm`，进系统后需安装 [HeliPort](https://github.com/OpenIntelWireless/HeliPort/releases) 才能连 Wi-Fi。安装器里没有 Wi-Fi，请写完整离线安装包，或使用有线网卡。
-- 触控板：I2C 触控板可用；触控屏没有 macOS 驱动，不保证能用。
-- 本仓库中的 OpenCore 与各 kext 仍遵循各自上游许可证（如 Acidanthera 等），请勿单独改写其许可。
+无线：Intel AX211 使用 `itlwm`，进系统后需安装 [HeliPort](https://github.com/OpenIntelWireless/HeliPort/releases) 才能连 Wi-Fi。安装器里没有 Wi-Fi，请准备完整离线安装包或有线网卡。
 
-## 不要做的事
+## 已知限制
+- AC 拔插响应 ≤10s（无 ACPI 通知，靠轮询）
+- 适配器 Wattage 显示 60W 而非实际 90W
+- 触控板偶发失灵（VoodooI2C 已知问题）；触控屏没有 macOS 驱动
+- 关机可能卡住（AppleUserECM dext 残留）
+- 非满充充电显示和睡眠唤醒待进一步验证
 
-- 不要把含有真实序列号的 EFI 推到公开仓库。
-- 不要改动华为电脑的内置硬盘来安装。本配置针对外接硬盘安装场景。
+## 许可证
+- OpenCore：BSD-3-Clause
+- Lilu / VirtualSMC：BSD-3-Clause
+- ECEnabler：GPL-3.0
+- HuaweiECBattery：BSD-3-Clause（基于 VirtualSMC）
+- 其他 kext 见各自上游许可证
+
+## 致谢
+- acidanthera 团队（OpenCore / Lilu / VirtualSMC）
+- 1Revenger1（ECEnabler）
+- [nullmoth/1401](https://github.com/nullmoth/1401)（初始参考配置）
+- 各 kext 作者
