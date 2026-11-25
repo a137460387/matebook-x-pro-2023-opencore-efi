@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.1.0 (2026-11-25)
+- fix: OEM/型号读取（ACPI_OBJECT Buffer 紧凑布局 Length@4/Pointer@8）
+- feat: Manufacturer = DESAY, DeviceName = HB5781P1EEW-31T
+- 电池信息全链路完成：容量/电压/循环/温度/序列号/OEM/型号/90W 全部真实值
+
 ## v2.0.0 (2026-11-25)
 - feat: 电池温度实时读取（B0TM, 0.1K 单位）
 - feat: 适配器功率修正为 90W（B0PW u24 LE mW）
