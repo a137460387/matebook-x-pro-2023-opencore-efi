@@ -2695,9 +2695,9 @@
 				<key>BundlePath</key>
 				<string>USBToolBox.kext</string>
 				<key>Comment</key>
-				<string></string>
+				<string>Disabled: native XHCI support confirmed (TXHC=a71e class-match, XHCI=51ed via XHCI-unsupported); replaced by USBMap.kext</string>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 				<key>ExecutablePath</key>
 				<string>Contents/MacOS/USBToolBox</string>
 				<key>MaxKernel</key>
@@ -2713,9 +2713,9 @@
 				<key>BundlePath</key>
 				<string>UTBMap.kext</string>
 				<key>Comment</key>
-				<string>USB port map supplied by the user</string>
+				<string>Disabled: native XHCI support confirmed (TXHC=a71e class-match, XHCI=51ed via XHCI-unsupported); replaced by USBMap.kext</string>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 				<key>ExecutablePath</key>
 				<string></string>
 				<key>MaxKernel</key>
@@ -2734,6 +2734,24 @@
 				<string></string>
 				<key>Enabled</key>
 				<false/>
+				<key>ExecutablePath</key>
+				<string></string>
+				<key>MaxKernel</key>
+				<string></string>
+				<key>MinKernel</key>
+				<string></string>
+				<key>PlistPath</key>
+				<string>Contents/Info.plist</string>
+			</dict>
+			<dict>
+				<key>Arch</key>
+				<string>Any</string>
+				<key>BundlePath</key>
+				<string>USBMap.kext</string>
+				<key>Comment</key>
+				<string>USB port map converted from UTBMap (verified layout), pure injector</string>
+				<key>Enabled</key>
+				<true/>
 				<key>ExecutablePath</key>
 				<string></string>
 				<key>MaxKernel</key>
@@ -3422,13 +3440,15 @@
 			<key>AdviseFeatures</key>
 			<false/>
 			<key>MLB</key>
-			<string>REPLACE_ME</string>
+			<string>C02133500J9P8PGCB</string>
 			<key>MaxBIOSVersion</key>
 			<false/>
 			<key>ProcessorType</key>
 			<integer>3841</integer>
 			<key>ROM</key>
-			<string>REPLACE_ME</string>
+			<data>
+			RAA6T5L5
+			</data>
 			<key>SpoofVendor</key>
 			<true/>
 			<key>SystemMemoryStatus</key>
@@ -3436,9 +3456,9 @@
 			<key>SystemProductName</key>
 			<string>MacBookPro16,2</string>
 			<key>SystemSerialNumber</key>
-			<string>REPLACE_ME</string>
+			<string>C02G7UYAML7H</string>
 			<key>SystemUUID</key>
-			<string>REPLACE_ME</string>
+			<string>84FEFD12-48C6-461F-AF91-7545CE2E8B07</string>
 		</dict>
 		<key>UpdateDataHub</key>
 		<true/>
