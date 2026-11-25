@@ -26,7 +26,6 @@
 | 蓝牙 | ✅ IntelBluetoothFirmware + BlueToolFixup |
 | 触控板 | ✅ VoodooI2C 自定义修复（D0上电+polling模式，手势完整） |
 | 睡眠 | ⚠️ 未充分验证 |
-| 关机 | ⚠️ 可能卡住 ~4 分钟（USB dext 残留） |
 
 ## 依赖
 - OpenCore 1.0.x
@@ -47,7 +46,6 @@
 - AC 拔插响应 ≤10s（无 ACPI 通知，靠轮询）
 - 启动偶尔需等待约2分钟（华为 DSDT ACPI 解析固有延迟）
 - 触控屏没有 macOS 驱动
-- 关机可能卡住（AppleUserECM dext 残留）
 - 非满充充电显示和睡眠唤醒待进一步验证
 - USB 扩展坞音频需手动切换输出（macOS 设计行为，非 bug）
 - Apple Music 蓝牙耳机播放受 DRM 限制（黑苹果固有限制）
