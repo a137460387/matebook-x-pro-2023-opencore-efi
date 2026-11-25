@@ -1,5 +1,7 @@
 # Huawei MateBook X Pro 2023 — OpenCore EFI
 
+**当前版本：v2.0.0**（2026-11-25）— 电池温度实时读取、适配器功率修正为 90W、序列号 hex 格式。详见 [CHANGELOG.md](CHANGELOG.md)。
+
 ## 适用机型
 - Huawei MateBook X Pro 2023（i7-1360P / Iris Xe）
 - 其他华为 TGL/RPL 笔记本可能兼容（HWEC EC 路径相同）
@@ -15,7 +17,8 @@
 |---|---|
 | 电池显示 | ✅ HuaweiECBattery 自研驱动 |
 | AC 拔插识别 | ✅ 响应 ≤10s |
-| 充电功率显示 | ⚠️ Wattage 固定 60W（实际支持 90W） |
+| 充电功率显示 | ✅ 90W（已修正，读 EC PD 协商功率） |
+| 电池温度 | ✅ 实时读取（EC B0TM，0.1K 单位） |
 | 显卡加速 | ✅ WhateverGreen / WhateverXe |
 | 声卡 | ✅ AppleALC |
 | WiFi | ✅ itlwm + HeliPort（Intel AX211） |
@@ -41,7 +44,7 @@
 
 ## 已知限制
 - AC 拔插响应 ≤10s（无 ACPI 通知，靠轮询）
-- 适配器 Wattage 显示 60W 而非实际 90W
+- 电池 OEM/型号显示 Unknown（EC 中有真实值 "DESAY"/"HB5781P1EEW-31T1"，macOS ACPICA 对 Buffer 对象求值失败，待修复）
 - 触控板偶发失灵（VoodooI2C 已知问题）；触控屏没有 macOS 驱动
 - 关机可能卡住（AppleUserECM dext 残留）
 - 非满充充电显示和睡眠唤醒待进一步验证

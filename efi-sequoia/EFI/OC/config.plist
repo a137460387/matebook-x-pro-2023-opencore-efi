@@ -3429,8 +3429,6 @@
 			<integer>3841</integer>
 			<key>ROM</key>
 			<string>REPLACE_ME</string>
-			<key>Serial</key>
-			<string>REPLACE_ME</string>
 			<key>SpoofVendor</key>
 			<true/>
 			<key>SystemMemoryStatus</key>
