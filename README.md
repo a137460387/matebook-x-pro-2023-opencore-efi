@@ -1,6 +1,6 @@
 # Huawei MateBook X Pro 2023 — OpenCore EFI
 
-**当前版本：v2.2.0**（2026-11-25）— 声卡修复：自定义 AppleALC layout 99（CX11970 扬声器+耳机自动切换）。详见 [CHANGELOG.md](CHANGELOG.md)。
+**当前版本：v2.3.0**（2026-11-25）— 触控板完全修复：Goodix GXTP7863 光标+手势正常。详见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 适用机型
 - Huawei MateBook X Pro 2023（i7-1360P / Iris Xe）
@@ -24,7 +24,7 @@
 | 声卡 | ✅ AppleALC 自定义 layout 99（CX11970，扬声器+耳机自动切换） |
 | WiFi | ✅ itlwm + HeliPort（Intel AX211） |
 | 蓝牙 | ✅ IntelBluetoothFirmware + BlueToolFixup |
-| 触控板 | ⚠️ VoodooI2C（偶发失灵需重启） |
+| 触控板 | ✅ VoodooI2C 自定义修复（D0上电+polling模式，手势完整） |
 | 睡眠 | ⚠️ 未充分验证 |
 | 关机 | ⚠️ 可能卡住 ~4 分钟（USB dext 残留） |
 
@@ -45,7 +45,8 @@
 
 ## 已知限制
 - AC 拔插响应 ≤10s（无 ACPI 通知，靠轮询）
-- 触控板偶发失灵（VoodooI2C 已知问题）；触控屏没有 macOS 驱动
+- 启动偶尔需等待约2分钟（华为 DSDT ACPI 解析固有延迟）
+- 触控屏没有 macOS 驱动
 - 关机可能卡住（AppleUserECM dext 残留）
 - 非满充充电显示和睡眠唤醒待进一步验证
 - USB 扩展坞音频需手动切换输出（macOS 设计行为，非 bug）

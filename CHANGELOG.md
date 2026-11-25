@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.3.0 (2026-11-25)
+- feat: 触控板完全修复（Goodix GXTP7863，从未工作到光标+手势完整）
+- fix: I2C控制器D3hot→D0上电（PMCSR动态定位，替代硬编码偏移）
+- fix: LPSS硬复位清除wedged总线状态机
+- fix: polling时序隔离（init期间暂停polling，避免总线竞争）
+- fix: post-reset SET_POWER（Linux i2c_hid parity）
+- fix: 跳过Goodix不支持的GET_REPORT（避免总线卡死）
+- fix: contact_count越界钳位（防panic）
+- feat: HID子模块升级（Surface/Button Switch支持）
+- 启用SSDT-TPD0
+- 启动稳定性改善（PMCSR安全写入）
+
 ## v2.2.0 (2026-11-25)
 - feat: 自定义 AppleALC layout 99（Conexant CX11970）
 - fix: 内置扬声器无声/音量小（正确路径 0x26←0x23 + 0x1d←0x22）

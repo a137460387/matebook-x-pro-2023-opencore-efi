@@ -114,7 +114,7 @@
 				<key>Comment</key>
 				<string>Goodix GT7863 HID-over-I2C trackpad on \_SB.PC00.I2C0</string>
 				<key>Enabled</key>
-				<false/>
+				<true/>
 				<key>Path</key>
 				<string>SSDT-TPD0.aml</string>
 			</dict>
@@ -3428,15 +3428,13 @@
 			<key>ProcessorType</key>
 			<integer>3841</integer>
 			<key>ROM</key>
-			<data>
-			AAAAAAAA
-			</data>
+			<string>REPLACE_ME</string>
 			<key>SpoofVendor</key>
 			<true/>
 			<key>SystemMemoryStatus</key>
 			<string>Auto</string>
 			<key>SystemProductName</key>
-			<string>REPLACE_ME</string>
+			<string>MacBookPro16,2</string>
 			<key>SystemSerialNumber</key>
 			<string>REPLACE_ME</string>
 			<key>SystemUUID</key>
