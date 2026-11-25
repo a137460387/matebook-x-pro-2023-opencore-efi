@@ -1,6 +1,6 @@
 # Huawei MateBook X Pro 2023 — OpenCore EFI
 
-**当前版本：v2.1.0**（2026-11-25）— OEM/型号正确读取（DESAY / HB5781P1EEW-31T），电池信息全链路完成。详见 [CHANGELOG.md](CHANGELOG.md)。
+**当前版本：v2.2.0**（2026-11-25）— 声卡修复：自定义 AppleALC layout 99（CX11970 扬声器+耳机自动切换）。详见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 适用机型
 - Huawei MateBook X Pro 2023（i7-1360P / Iris Xe）
@@ -21,7 +21,7 @@
 | 电池温度 | ✅ 实时读取（EC B0TM，0.1K 单位） |
 | 电池 OEM/型号 | ✅ DESAY / HB5781P1EEW-31T |
 | 显卡加速 | ✅ WhateverGreen / WhateverXe |
-| 声卡 | ✅ AppleALC |
+| 声卡 | ✅ AppleALC 自定义 layout 99（CX11970，扬声器+耳机自动切换） |
 | WiFi | ✅ itlwm + HeliPort（Intel AX211） |
 | 蓝牙 | ✅ IntelBluetoothFirmware + BlueToolFixup |
 | 触控板 | ⚠️ VoodooI2C（偶发失灵需重启） |
@@ -48,6 +48,8 @@
 - 触控板偶发失灵（VoodooI2C 已知问题）；触控屏没有 macOS 驱动
 - 关机可能卡住（AppleUserECM dext 残留）
 - 非满充充电显示和睡眠唤醒待进一步验证
+- USB 扩展坞音频需手动切换输出（macOS 设计行为，非 bug）
+- Apple Music 蓝牙耳机播放受 DRM 限制（黑苹果固有限制）
 
 ## 许可证
 - OpenCore：BSD-3-Clause

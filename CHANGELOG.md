@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.2.0 (2026-11-25)
+- feat: 自定义 AppleALC layout 99（Conexant CX11970）
+- fix: 内置扬声器无声/音量小（正确路径 0x26←0x23 + 0x1d←0x22）
+- fix: 耳机插拔自动切换（组合输出组 + unsol verb）
+- fix: Apple Music 播放无声（声卡路径修正后恢复）
+- 已知限制：USB 扩展坞音频需手动切换；蓝牙耳机 Apple Music DRM 限制
+
 ## v2.1.0 (2026-11-25)
 - fix: OEM/型号读取（ACPI_OBJECT Buffer 紧凑布局 Length@4/Pointer@8）
 - feat: Manufacturer = DESAY, DeviceName = HB5781P1EEW-31T
