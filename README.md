@@ -1,6 +1,6 @@
 # Huawei MateBook X Pro 2023 — OpenCore EFI
 
-**当前版本：v2.6.0**（2026-11-26）— WiFi 启动自动重连 workaround（LaunchDaemon 修复 IO80211 scan HALTED）；IntelBTPatcher 启用；华为 BLE 鼠标配对成功（重置清 bond）。详见 [CHANGELOG.md](CHANGELOG.md)。
+**当前版本：v2.7.0**（2026-11-26）— CPU 温度（TC0P）+ 双风扇转速（F0Ac/F1Ac）通过 ECCD mailbox 读取，Stats 菜单栏可实时监控；修复 ACPICA 参数步长与温度单位问题。详见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 适用机型
 - Huawei MateBook X Pro 2023（i7-1360P / Iris Xe）
@@ -19,6 +19,7 @@
 | AC 拔插识别 | ✅ 响应 ≤10s |
 | 充电功率显示 | ✅ 90W（已修正，读 EC PD 协商功率） |
 | 电池温度 | ✅ 实时读取（EC B0TM，0.1K 单位） |
+| CPU 温度/风扇 | ✅ TC0P + F0Ac/F1Ac（ECCD mailbox，Stats 可读） |
 | 电池 OEM/型号 | ✅ DESAY / HB5781P1EEW-31T |
 | 显卡加速 | ✅ WhateverGreen / WhateverXe |
 | 声卡 | ✅ AppleALC 自定义 layout 99（CX11970，扬声器+耳机自动切换） |
@@ -62,6 +63,7 @@
 - WiFi 启动后需约 30s 自动重连：IO80211 scan 状态机时序竞争导致开机扫描列表为空，已用 LaunchDaemon 自动重置 workaround（见安装方法第 5 步）
 
 ## 推荐工具（非 EFI 组件）
+- [Stats](https://github.com/exelban/stats)：菜单栏实时监控 CPU 温度（TC0P）与风扇转速（F0Ac/F1Ac）
 - [Atoll](https://github.com/Ebullioscopic/Atoll)：灵动岛风格菜单栏工具，黑苹果可用
 
 ## 许可证

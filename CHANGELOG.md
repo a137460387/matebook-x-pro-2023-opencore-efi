@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.7.0 (2026-11-26)
+- feat: CPU 温度读取（TC0P，ECCD mailbox 命令 0x61，单位 0.1°C）
+- feat: 双风扇转速读取（F0Ac/F1Ac，ECCD 命令 0x7C，RPM）
+- fix: ACPICA 输入参数数组步长 16B→24B（Apple 侧 sizeof(ACPI_OBJECT)=24）
+- fix: CPU 温度阈值 125→1250（raw 单位为 0.1°C 非整数°C）
+- 推荐 Stats app 实时监控温度/风扇
+
 ## v2.6.0 (2026-11-26)
 - fix: WiFi 启动后 scan HALTED 问题（LaunchDaemon 自动重置 workaround）
 - fix: IntelBTPatcher 启用 + btleadvoff（BLE 配对改善）
