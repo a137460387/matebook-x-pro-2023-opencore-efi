@@ -118,6 +118,14 @@
 				<key>Path</key>
 				<string>SSDT-TPD0.aml</string>
 			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Goodix GXTP738X touchscreen on _SB.PC00.I2C1</string>
+				<key>Enabled</key>
+				<true/>
+				<key>Path</key>
+				<string>SSDT-TPL1.aml</string>
+			</dict>
 		</array>
 		<key>Delete</key>
 		<array/>

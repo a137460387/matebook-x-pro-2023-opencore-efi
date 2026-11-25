@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.5.0 (2026-11-26)
+- feat: 触摸屏修复（Goodix GXTP738X, I2C-1, SSDT-TPL1）
+- feat: VoodooI2CTouchscreenHIDEventDriver 绝对坐标触摸事件
+- 触控板+触屏同时工作无冲突
+
 ## v2.4.0 (2026-11-25)
 - perf: Goodix reset 超时从 12s×2 缩短到 2s×1，启动从 60+s 降回 ~30s
 - fix: USBToolBox 替换为 USBMap（消除 waitForMatchingService 超时）
