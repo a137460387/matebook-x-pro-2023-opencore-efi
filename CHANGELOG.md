@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.4.0 (2026-11-25)
+- perf: Goodix reset 超时从 12s×2 缩短到 2s×1，启动从 60+s 降回 ~30s
+- fix: USBToolBox 替换为 USBMap（消除 waitForMatchingService 超时）
+- fix: D0 上电 delay 10→50ms 改善冷启动稳定性
+- chore: 清理所有诊断属性代码
+
 ## v2.3.0 (2026-11-25)
 - feat: 触控板完全修复（Goodix GXTP7863，从未工作到光标+手势完整）
 - fix: I2C控制器D3hot→D0上电（PMCSR动态定位，替代硬编码偏移）

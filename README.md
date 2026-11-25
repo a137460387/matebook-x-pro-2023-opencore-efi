@@ -1,6 +1,6 @@
 # Huawei MateBook X Pro 2023 — OpenCore EFI
 
-**当前版本：v2.3.0**（2026-11-25）— 触控板完全修复：Goodix GXTP7863 光标+手势正常。详见 [CHANGELOG.md](CHANGELOG.md)。
+**当前版本：v2.4.0**（2026-11-25）— 启动优化：Goodix reset 2s 超时 + USBMap 替换 USBToolBox，启动 ~30s。详见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 适用机型
 - Huawei MateBook X Pro 2023（i7-1360P / Iris Xe）
@@ -25,6 +25,7 @@
 | WiFi | ✅ itlwm + HeliPort（Intel AX211） |
 | 蓝牙 | ✅ IntelBluetoothFirmware + BlueToolFixup |
 | 触控板 | ✅ VoodooI2C 自定义修复（D0上电+polling模式，手势完整） |
+| 启动速度 | ✅ ~30s（reset 2s 超时优化） |
 | 睡眠 | ⚠️ 未充分验证 |
 
 ## 依赖
@@ -44,7 +45,6 @@
 
 ## 已知限制
 - AC 拔插响应 ≤10s（无 ACPI 通知，靠轮询）
-- 启动偶尔需等待约2分钟（华为 DSDT ACPI 解析固有延迟）
 - 触控屏没有 macOS 驱动
 - 非满充充电显示和睡眠唤醒待进一步验证
 - USB 扩展坞音频需手动切换输出（macOS 设计行为，非 bug）
