@@ -64,7 +64,10 @@
 
 ## 推荐工具（非 EFI 组件）
 - [Stats](https://github.com/exelban/stats)：菜单栏实时监控 CPU 温度（TC0P）与风扇转速（F0Ac/F1Ac）
-- [Atoll](https://github.com/Ebullioscopic/Atoll)：灵动岛风格菜单栏工具，黑苹果可用
+- [Atoll](https://github.com/Ebullioscopic/Atoll)：灵动岛风格菜单栏工具，黑苹果可用。需先安装 XeCompilerAdapter 修复（见下），否则媒体渲染时闪退
+
+## 系统盘补丁（非 EFI 组件）
+- [XeCompilerAdapter serialized-request 修复](https://github.com/a137460387/WhateverXe-Graphics/releases/tag/v0.4.5-serialized-fix.1)：修复 WhateverXe-Graphics 0.4.4/0.4.5 的 `Xe compiler unsupported serialized request` 崩溃（Atoll 等 app）。下载 adapter.dylib + install-adapter-fix.sh，`sudo bash install-adapter-fix.sh adapter.dylib`。装在 `/Library/GPUBundles/`，不在 EFI 里；恢复/重装系统后需重新执行。
 
 ## 许可证
 - OpenCore：BSD-3-Clause

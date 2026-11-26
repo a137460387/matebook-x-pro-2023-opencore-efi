@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.8.0 (2026-11-26)
+- fix: XeCompilerAdapter "unsupported serialized request" 崩溃（Atoll 媒体渲染闪退根因）
+- adapter.dylib 3 字节二进制 patch：跳过 gate1 size==216 白名单 + 两处 AIR extent 反向区间检查
+- 发布在 WhateverXe-Graphics fork：v0.4.5-serialized-fix.1（含校验安装脚本+回滚说明）
+- 系统盘补丁（/Library/GPUBundles/），非 EFI 组件；恢复/重装后需重新安装
+- 验证：Atoll+媒体+悬停、照片、40 pipeline 压测全过；局限：原版对照未复现（见修复报告 §2.6）
+
 ## v2.7.0 (2026-11-26)
 - feat: CPU 温度读取（TC0P，ECCD mailbox 命令 0x61，单位 0.1°C）
 - feat: 双风扇转速读取（F0Ac/F1Ac，ECCD 命令 0x7C，RPM）
