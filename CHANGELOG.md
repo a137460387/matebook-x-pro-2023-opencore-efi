@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.8.2 (2026-11-26)
+- docs: VoodooSOF（macOS Intel SOF/DMIC 驱动）Phase 0 止损，记录 IOPCIFamily 架构 blocker
+- 根因：macOS IOPCIDevice::open() 独占语义，同一 PCI function 不允许第二 driver open；不 open 则 BAR MMIO 全读 0xffffffff（IOPCIUseDeviceMapper=Yes）
+- 4 次重启实测：无 open→GCAP 全 1；有 open→AppleHDA 扬声器失效；回滚后恢复
+- 结论：内置 DMIC 在 macOS 下无可行内核驱动路径（除非 Lilu hook IOPCIFamily，风险过高不采用）
+- 替代方案不变：iPhone 连续互通麦克风、USB 麦克风、蓝牙耳机 HFP
+- 无 EFI 变更；VoodooSOF 源码+证据留档 macOS ~/code/Ai/VoodooSOF/
+
 ## v2.8.1 (2026-11-26)
 - docs: 内置麦克风确认为硬件架构限制（PCH DMIC/Intel SOF，非 HDA codec），AppleALC 不可修
 - 证据：Linux NHLT 4ch DMIC + Windows Intel SST LINKTYPE_02 + macOS num-internal-mics=0 三系统交叉验证
