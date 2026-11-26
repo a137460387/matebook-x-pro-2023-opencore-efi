@@ -58,6 +58,7 @@
 - 非满充充电显示和睡眠唤醒待进一步验证
 - USB 扩展坞音频需手动切换输出（macOS 设计行为，非 bug）
 - Apple Music 蓝牙耳机播放受 DRM 限制（黑苹果固有限制）
+- **内置麦克风不可用**：4ch 数字麦克风阵列走 PCH DMIC/Intel SOF（NHLT 表描述），不在 CX11970 HDA codec 上，AppleALC/VoodooHDA 均无法驱动。替代：iPhone 连续互通麦克风、USB 麦克风、蓝牙耳机 HFP。外接 3.5mm 麦克风插孔（codec pin 0x19）理论上可用但未经实测
 
 提示：华为 BLE 鼠标首次配对需长按重置键进入配对模式，清除旧 bond 后重新配对即可。
 - WiFi 启动后需约 30s 自动重连：IO80211 scan 状态机时序竞争导致开机扫描列表为空，已用 LaunchDaemon 自动重置 workaround（见安装方法第 5 步）

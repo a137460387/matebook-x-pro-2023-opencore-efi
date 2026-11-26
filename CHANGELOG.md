@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.8.1 (2026-11-26)
+- docs: 内置麦克风确认为硬件架构限制（PCH DMIC/Intel SOF，非 HDA codec），AppleALC 不可修
+- 证据：Linux NHLT 4ch DMIC + Windows Intel SST LINKTYPE_02 + macOS num-internal-mics=0 三系统交叉验证
+- 替代方案：iPhone 连续互通麦克风（已可用）、USB 麦克风、蓝牙耳机 HFP
+- 无 EFI 变更；诊断报告在 macOS 本机 ~/code/Ai/AppleALC/MIC-FIX-REPORT.md（含 evidence/ 目录，U350 恢复盘有同步副本）
+
 ## v2.8.0 (2026-11-26)
 - fix: XeCompilerAdapter "unsupported serialized request" 崩溃（Atoll 媒体渲染闪退根因）
 - adapter.dylib 3 字节二进制 patch：跳过 gate1 size==216 白名单 + 两处 AIR extent 反向区间检查
