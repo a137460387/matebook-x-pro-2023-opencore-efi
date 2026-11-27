@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.9.0 (2026-11-27)
+- fix: 冷启动 Apple logo 斜块花屏（内置 eDP 面板 bring-up 失败）—— efi-sequoia 的 WhateverXe 0.8.2 升级到上游 0.8.6
+- 根因：WhateverXe 0.8.2 在 Raptor Lake-P（i7-1360P，8086:A7A0）冷启动时，framebuffer modeset 抢占控制器 work-loop gate，导致 eDP 时钟变更被拒、mode set 失败、面板送出错误 stride/tiling 的 framebuffer（Apple logo 被斜切平铺成碎块）
+- 修复：0.8.3+ 的 cold-clock 独立路径（上游 commit f49ff77ad3，adlnSetColdClock），冷启动时钟变更不再等待该 gate
+- 实测验证：MateBook X Pro 2023 / macOS 15.8.3 Sequoia，冷启动 Apple logo 正常点亮、进系统、Metal 2 加速正常；0.8.6 EFI 同步到内置盘 ESP 后拔 U350 独立引导通过
+- 仅 efi-sequoia 升级（已本机实测）；efi-tahoe 保持 0.8.0（无 Tahoe 环境，未实测，不宣称修复）
+- WhateverXe-Graphics 系统盘组件需同版本配套，重装/恢复后重新安装
+
 ## v2.8.2 (2026-11-26)
 - docs: VoodooSOF（macOS Intel SOF/DMIC 驱动）Phase 0 止损，记录 IOPCIFamily 架构 blocker
 - 根因：macOS IOPCIDevice::open() 独占语义，同一 PCI function 不允许第二 driver open；不 open 则 BAR MMIO 全读 0xffffffff（IOPCIUseDeviceMapper=Yes）

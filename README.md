@@ -1,6 +1,6 @@
 # Huawei MateBook X Pro 2023 — OpenCore EFI
 
-**当前版本：v2.7.0**（2026-11-26）— CPU 温度（TC0P）+ 双风扇转速（F0Ac/F1Ac）通过 ECCD mailbox 读取，Stats 菜单栏可实时监控；修复 ACPICA 参数步长与温度单位问题。详见 [CHANGELOG.md](CHANGELOG.md)。
+**当前版本：v2.9.0**（2026-11-27）— 修复冷启动 Apple logo 斜块花屏（内置 eDP 面板 bring-up 失败）：efi-sequoia 的 WhateverXe 升级到上游 0.8.6（含 Raptor Lake-P cold-clock 修复），已在 MateBook X Pro 2023 / macOS 15.8.3 实测冷启动点亮、Metal 2 正常、内置盘独立引导通过。详见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 适用机型
 - Huawei MateBook X Pro 2023（i7-1360P / Iris Xe）
