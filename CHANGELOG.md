@@ -1,5 +1,14 @@
 # Changelog
 
+## v2.9.1 (2026-11-28)
+- fix: 电池状态偶发永久停摆（HuaweiECBattery poll timer 被排到约 49 天后）—— efi-sequoia 的 HuaweiECBattery.kext 更新为含下溢修复的 Release 1.4.2
+- 根因：BatteryManager sync 分支 `NormalPollInterval(10000) - (2+timerDelta)*QuickPollInterval(1000)` 在 `timerDelta∈[9,54]` 时 uint32 下溢（10000-(2+9)*1000 = -1000 → 4294966296ms），`setTimeoutMS` 返回成功但 timer 实际排到约 49 天后，不再触发
+- 定位：AML 插桩（7 个 ACPICA 入口全部成对返回）+ timer/lock 锚点锁定到 `[SCHED] sync delta=9` 后静默；timerDelta = 距上次 SMC 读取的秒数，故停摆总在 Stats/iStat 等读取活跃后 9~54 秒出现
+- 修复：`delay = subtract >= NormalPollInterval ? QuickPollInterval : NormalPollInterval - subtract`，把下溢区间钳到 1 秒
+- 实测验证：MateBook X Pro 2023 / macOS 15.8.3 Sequoia，Debug 插桩版连续 30 分钟，919 次落在原 bug 窗口（delta≥9）的 sync 全部钳制为 delay=1000 且正常接续下一轮 TICK，0 停摆；随后移除 `-liludbg`/`-hecbatdbg` 调试参数并换回 Release 版（VersionInfo=REL-142）
+- 仅 efi-sequoia 更新（已本机实测）；efi-tahoe 未动（无 Tahoe 环境，未实测，不宣称修复）
+- 自研驱动源码（基线+修复两个 commit）在 https://github.com/a137460387/HuaweiECBattery （private）
+
 ## v2.9.0 (2026-11-27)
 - fix: 冷启动 Apple logo 斜块花屏（内置 eDP 面板 bring-up 失败）—— efi-sequoia 的 WhateverXe 0.8.2 升级到上游 0.8.6
 - 根因：WhateverXe 0.8.2 在 Raptor Lake-P（i7-1360P，8086:A7A0）冷启动时，framebuffer modeset 抢占控制器 work-loop gate，导致 eDP 时钟变更被拒、mode set 失败、面板送出错误 stride/tiling 的 framebuffer（Apple logo 被斜切平铺成碎块）

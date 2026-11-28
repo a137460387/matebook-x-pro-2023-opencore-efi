@@ -1,6 +1,6 @@
 # Huawei MateBook X Pro 2023 — OpenCore EFI
 
-**当前版本：v2.9.0**（2026-11-27）— 修复冷启动 Apple logo 斜块花屏（内置 eDP 面板 bring-up 失败）：efi-sequoia 的 WhateverXe 升级到上游 0.8.6（含 Raptor Lake-P cold-clock 修复），已在 MateBook X Pro 2023 / macOS 15.8.3 实测冷启动点亮、Metal 2 正常、内置盘独立引导通过。详见 [CHANGELOG.md](CHANGELOG.md)。
+**当前版本：v2.9.1**（2026-11-28）— 修复电池状态偶发永久停摆：HuaweiECBattery poll timer 的 sync 分支在 `timerDelta∈[9,54]` 时 uint32 下溢，把 timer 排到约 49 天后；钳制 delay 后 Debug 插桩版 30 分钟 919 次触发窗口零停摆验证通过。efi-sequoia 更新为含修复的 Release 1.4.2，调试参数已移除。详见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 适用机型
 - Huawei MateBook X Pro 2023（i7-1360P / Iris Xe）
